@@ -1,0 +1,30 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="main_menu_button_margin">48dp</dimen>
+    <dimen name="main_menu_title_bottom_margin">32dp</dimen>
+    <dimen name="main_menu_logo_size">300dp</dimen>
+
+    <dimen name="screen_margin">16dp</dimen>
+    <dimen name="truth_or_dare_separator_width">1dp</dimen>
+    <dimen name="truth_or_dare_separator_margin">8dp</dimen>
+
+    <dimen name="profile_image_size">56dp</dimen>
+
+    <dimen name="views_margin_small">4dp</dimen>
+    <dimen name="views_margin">8dp</dimen>
+    <dimen name="views_margin_big">16dp</dimen>
+
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_icon_size">72dp</dimen>
+    <dimen name="card_unlock_icon_size">40dp</dimen>
+
+    <dimen name="recycler_bottom_padding">72dp</dimen>
+    <dimen name="divider_height">2dp</dimen>
+
+    <dimen name="game_type_margin_bottom">24dp</dimen>
+
+    <dimen name="splash_icon_google_recommended_size">192dp</dimen>
+    <dimen name="card_stroke_width">1dp</dimen>
+    <dimen name="card_padding">4dp</dimen>
+</resources>

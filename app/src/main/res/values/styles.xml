@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Chip.Assist" parent="Widget.Material3.Chip.Assist">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="chipIconTint">?colorPrimary</item>
+        <item name="chipBackgroundColor">?colorSurface</item>
+    </style>
+</resources>

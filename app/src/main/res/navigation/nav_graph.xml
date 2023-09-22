@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.androbrain.ui.fragments.menu.MenuFragment"
+        android:label="MenuFragment"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_gameFragment"
+            app:destination="@id/gameFragment"
+            app:enterAnim="@anim/slide_in_from_bottom"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out_to_bottom" />
+        <action
+            android:id="@+id/action_menuFragment_to_chooseProfileFragment"
+            app:destination="@id/chooseProfileFragment"
+            app:enterAnim="@anim/scale_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/scale_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseProfileFragment"
+        android:name="com.androbrain.ui.fragments.choose_profile.ChooseProfileFragment"
+        android:label="ChooseProfileFragment"
+        tools:layout="@layout/fragment_choose_profile" />
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.androbrain.ui.fragments.game.GameFragment"
+        android:label="GameFragment"
+        tools:layout="@layout/fragment_game" />
+
+</navigation>

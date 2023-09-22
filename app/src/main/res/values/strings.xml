@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">No Wrong Answers</string>
+
+    <!-- Menu -->
+    <string name="play">Play</string>
+    <string name="load">Continue</string>
+
+    <string name="share">Share</string>
+    <string name="rate">Rate</string>
+    <string name="more_games">More games</string>
+
+    <string name="choose_mode">Choose mode</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="light_mode">Light mode</string>
+    <string-array name="lightning_modes">
+        <item>Dark mode</item>
+        <item>Light mode</item>
+        <item>System mode</item>
+    </string-array>
+</resources>
