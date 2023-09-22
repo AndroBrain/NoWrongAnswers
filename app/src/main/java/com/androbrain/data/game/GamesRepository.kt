@@ -2,6 +2,7 @@ package com.androbrain.data.game
 
 import android.content.Context
 import com.androbrain.R
+import java.util.*
 import javax.inject.Inject
 
 class GamesRepository @Inject constructor(
@@ -23,6 +24,6 @@ class GamesRepository @Inject constructor(
     }
 
     suspend fun updateGame(game: Game) {
-        gamesDataSource.updateGame(game)
+        gamesDataSource.updateGame(game.copy(lastEditTime = Date().time))
     }
 }

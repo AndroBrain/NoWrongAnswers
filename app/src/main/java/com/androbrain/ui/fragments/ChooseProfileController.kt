@@ -28,7 +28,7 @@ class ChooseProfileController(
                         context.resources.getStringArray(R.array.questions).size,
                     )
                 },
-                createdAt = dateFormatter.format(Date(profile.creationTime)),
+                createdAt = dateFormatter.format(Date(profile.lastEditTime)),
                 onClick = { onProfileClick(profile) }
             ).id(profile.id).addTo(this)
         }

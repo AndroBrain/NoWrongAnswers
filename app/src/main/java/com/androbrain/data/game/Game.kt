@@ -14,5 +14,5 @@ data class Game(
     @SerialName("id") val id: String = UUID.randomUUID().toString(),
     @SerialName("questions") val questions: List<String>,
     @SerialName("question_index") val questionsIndex: Int = 0,
-    @SerialName("creation_time") val creationTime: Long = Date().time,
+    @SerialName("last_edit_time") val lastEditTime: Long = Date().time,
 ) : Parcelable

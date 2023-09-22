@@ -29,7 +29,7 @@ class MenuViewModel @Inject constructor(
                 updateState { state ->
                     state.copy(
                         canContinue = allGames.games.isNotEmpty(),
-                        games = allGames.games.sortedBy { it.creationTime },
+                        games = allGames.games.sortedBy { it.lastEditTime },
                     )
                 }
             }.launchIn(this)
