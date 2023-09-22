@@ -27,10 +27,12 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/screen_margin"
             android:layout_marginBottom="@dimen/main_menu_title_bottom_margin"
+            android:fontFamily="@font/mario"
             android:gravity="center"
             android:text="@string/app_name"
             android:textAppearance="@style/TextAppearance.Material3.DisplayMedium"
-            android:textColor="?colorSecondary" />
+            android:textColor="?colorSecondary"
+            app:fontFamily="@font/mario" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_play"
