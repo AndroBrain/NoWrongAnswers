@@ -55,4 +55,8 @@ class GameViewModel @Inject constructor(
     fun inAppReviewShown() {
         updateState { state -> state.copy(showInAppReview = false) }
     }
+
+    fun gameEndDialogShown() {
+        updateState { state -> state.copy(finishShown = true) }
+    }
 }

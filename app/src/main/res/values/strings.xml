@@ -28,5 +28,8 @@
 
     <!-- Game -->
     <string name="game_next">Next question</string>
+    <string name="game_over">Congratulations!</string>
+    <string name="game_over_message">You’ve managed to get to the end!</string>
+    <string name="game_exit">Exit</string>
     <string name="rate_to_help_us">Write review to help us grow</string>
 </resources>

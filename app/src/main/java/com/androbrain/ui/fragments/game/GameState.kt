@@ -8,4 +8,5 @@ import kotlinx.parcelize.Parcelize
 data class GameState(
     val game: Game? = null,
     val showInAppReview: Boolean = false,
+    val finishShown: Boolean = false,
 ) : UiState

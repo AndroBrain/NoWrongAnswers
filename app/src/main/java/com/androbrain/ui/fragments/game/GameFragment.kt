@@ -20,6 +20,7 @@ import com.androbrain.core.utils.APP_PAGE_LINK
 import com.androbrain.core.utils.openLink
 import com.androbrain.core.utils.showInAppReview
 import com.androbrain.databinding.FragmentGameBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.Direction
@@ -131,14 +132,24 @@ class GameFragment : Fragment() {
                         viewModel.inAppReviewShown()
                     }
                     state.game?.let { game ->
-                        if (game.questionsIndex >= game.questions.size) {
-                            //                            TODO finish the game with dialog
+                        requireActivity().showInAppReview()
+                        if (game.questionsIndex >= game.questions.size && !state.finishShown) {
+                            viewModel.gameEndDialogShown()
+                            MaterialAlertDialogBuilder(requireContext())
+                                .setCancelable(false)
+                                .setTitle(R.string.game_over)
+                                .setMessage(R.string.game_over_message)
+                                .setPositiveButton(R.string.game_exit) { dialog, _ ->
+                                    dialog.dismiss()
+                                    viewModel.finishGame()
+                                    findNavController().popBackStack()
+                                }
+                                .show()
                         }
                         progressIndicator.setProgressCompat(game.questionsIndex, true)
                         progressIndicator.max = game.questions.size
                         adapter.setCards(
                             cards = game.questions.takeLast(game.questions.size - game.questionsIndex),
-                            changedItem = game.questionsIndex - 1,
                         )
                     }
                 }.launchIn(this)

@@ -24,9 +24,9 @@ class GameCardAdapter(
         }
     }
 
-    fun setCards(cards: List<String>, changedItem: Int) {
+    fun setCards(cards: List<String>) {
         this.cards = cards
-        notifyItemChanged(changedItem)
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = cards.size
