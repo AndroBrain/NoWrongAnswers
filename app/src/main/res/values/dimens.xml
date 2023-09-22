@@ -1,5 +1,6 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="toolbar_navigation_icon_space">64dp</dimen>
 
     <dimen name="main_menu_button_margin">48dp</dimen>
     <dimen name="main_menu_title_bottom_margin">32dp</dimen>

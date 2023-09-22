@@ -101,7 +101,7 @@ class GameFragment : Fragment() {
         }
     }
 
-    private fun setupObservers() {
+    private fun setupObservers() = with(binding) {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.onEach { state ->
@@ -114,6 +114,8 @@ class GameFragment : Fragment() {
                         if (game.questionsIndex >= game.questions.size) {
                             //                            TODO finish the game with dialog
                         }
+                        progressIndicator.setProgressCompat(game.questionsIndex, true)
+                        progressIndicator.max = game.questions.size
                         adapter.setCards(
                             cards = game.questions.takeLast(game.questions.size - game.questionsIndex),
                             changedItem = game.questionsIndex - 1,
