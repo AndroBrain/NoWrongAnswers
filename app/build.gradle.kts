@@ -66,6 +66,9 @@ dependencies {
     implementation(rootProject.extra.get("material") as String)
     implementation(rootProject.extra.get("constraintLayout") as String)
 
+//    Splash Screen
+    implementation(rootProject.extra.get("splashScreen") as String)
+
 //    Insets
     implementation(rootProject.extra.get("insetter") as String)
 

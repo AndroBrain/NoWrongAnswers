@@ -26,6 +26,7 @@ ext.apply {
     set("navigationUi", "androidx.navigation:navigation-ui-ktx:$navigationVersion")
     set("daggerHilt", "com.google.dagger:hilt-android:$daggerHiltVersion")
     set("daggerHiltCompiler", "com.google.dagger:hilt-android-compiler:$daggerHiltVersion")
+    set("splashScreen", "androidx.core:core-splashscreen:1.0.1")
 
 //    Data
 
