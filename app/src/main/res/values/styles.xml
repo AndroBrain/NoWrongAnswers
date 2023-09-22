@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Chip.Assist" parent="Widget.Material3.Chip.Assist">
         <item name="android:textColor">?colorPrimary</item>
         <item name="chipIconTint">?colorPrimary</item>
         <item name="chipBackgroundColor">?colorSurface</item>
+    </style>
+
+    <style name="Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleCentered">true</item>
+        <item name="subtitleCentered">true</item>
+        <item name="titleTextColor">?colorOnSurface</item>
+        <item name="subtitleTextColor">?colorOnSurface</item>
+        <item name="navigationContentDescription">@string/accessibility_go_back</item>
     </style>
 </resources>

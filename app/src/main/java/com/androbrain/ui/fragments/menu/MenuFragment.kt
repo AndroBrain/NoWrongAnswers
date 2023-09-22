@@ -61,17 +61,15 @@ class MenuFragment : Fragment() {
     }
 
     private fun setupActions() = with(binding) {
-        buttonPlay.setOnClickListener { findNavController().navigateSafely(MenuFragmentDirections.actionMenuFragmentToGameFragment()) }
+        buttonPlay.setOnClickListener {
+            viewModel.createGame()
+        }
 
         buttonLoad.setOnClickListener {
-//            val games = viewModel.state.value.games
-            val games = arrayOf("x")
+            val games = viewModel.state.value.games
             if (games.size == 1) {
-                viewModel.noteContinue()
                 findNavController().navigateSafely(
-                    MenuFragmentDirections.actionMenuFragmentToGameFragment(
-//                        GameArgs(games.first().id)
-                    )
+                    MenuFragmentDirections.actionMenuFragmentToGameFragment(games.first())
                 )
             } else {
                 findNavController().navigateSafely(MenuFragmentDirections.actionMenuFragmentToChooseProfileFragment())
@@ -117,6 +115,14 @@ class MenuFragment : Fragment() {
                         buttonLoad.clearAnimation()
                         buttonLoad.isVisible = false
                         _binding?.buttonPlay.scaleUpAndDown()
+                    }
+                    state.game?.let { game ->
+                        findNavController().navigateSafely(
+                            MenuFragmentDirections.actionMenuFragmentToGameFragment(
+                                game
+                            )
+                        )
+                        viewModel.gameOpened()
                     }
 
                     when (state.lightningMode) {

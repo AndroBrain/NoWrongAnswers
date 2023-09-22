@@ -29,11 +29,19 @@
         android:id="@+id/chooseProfileFragment"
         android:name="com.androbrain.ui.fragments.choose_profile.ChooseProfileFragment"
         android:label="ChooseProfileFragment"
-        tools:layout="@layout/fragment_choose_profile" />
+        tools:layout="@layout/fragment_choose_profile">
+        <action
+            android:id="@+id/action_chooseProfileFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+    </fragment>
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.androbrain.ui.fragments.game.GameFragment"
         android:label="GameFragment"
-        tools:layout="@layout/fragment_game" />
+        tools:layout="@layout/fragment_game">
+        <argument
+            android:name="game"
+            app:argType="com.androbrain.data.game.Game" />
+    </fragment>
 
 </navigation>
