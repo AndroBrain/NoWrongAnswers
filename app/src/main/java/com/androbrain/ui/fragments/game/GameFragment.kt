@@ -4,14 +4,40 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateInterpolator
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.androbrain.core.utils.showInAppReview
 import com.androbrain.databinding.FragmentGameBinding
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager
+import com.yuyakaido.android.cardstackview.CardStackListener
+import com.yuyakaido.android.cardstackview.Direction
+import com.yuyakaido.android.cardstackview.Duration
+import com.yuyakaido.android.cardstackview.StackFrom
+import com.yuyakaido.android.cardstackview.SwipeAnimationSetting
+import com.yuyakaido.android.cardstackview.SwipeableMethod
 import dagger.hilt.android.AndroidEntryPoint
+import dev.chrisbanes.insetter.applyInsetter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+
+private const val MIN_SWIPE_INTERVAL = 400L
 
 @AndroidEntryPoint
 class GameFragment : Fragment() {
     private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
+    internal val viewModel: GameViewModel by viewModels()
+    private var lastSwipeTime: Long? = null
+    private val adapter by lazy {
+        GameCardAdapter(cards = emptyList())
+    }
+    private val layoutManager get() = binding.cardStack.layoutManager as CardStackLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,7 +45,83 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGameBinding.inflate(inflater)
+        setupViews()
+        setupActions()
+        setupObservers()
         return binding.root
+    }
+
+    private fun setupViews() = with(binding) {
+        root.applyInsetter {
+            type(statusBars = true, navigationBars = true) {
+                margin()
+            }
+        }
+        val layoutManager = CardStackLayoutManager(requireContext(), object : CardStackListener {
+            override fun onCardDragging(direction: Direction?, ratio: Float) = Unit
+            override fun onCardSwiped(direction: Direction?) {
+                viewModel.nextQuestion()
+//                playSound(requireContext(), R.raw.sound_card_flip)
+            }
+
+            override fun onCardRewound() = Unit
+            override fun onCardCanceled() = Unit
+            override fun onCardAppeared(view: View?, position: Int) = Unit
+            override fun onCardDisappeared(view: View?, position: Int) = Unit
+        })
+        layoutManager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
+        layoutManager.setCanScrollHorizontal(true)
+        layoutManager.setCanScrollVertical(false)
+        layoutManager.setStackFrom(StackFrom.Bottom)
+        layoutManager.setVisibleCount(2)
+        cardStack.layoutManager = layoutManager
+        cardStack.adapter = adapter
+    }
+
+    private fun setupActions() = with(binding) {
+        toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+
+        buttonNext.setOnClickListener {
+            swipe(Direction.HORIZONTAL.random())
+        }
+    }
+
+    private fun swipe(direction: Direction) {
+        val swipeTime = System.currentTimeMillis()
+        val previousSwipeTime = lastSwipeTime
+        if (previousSwipeTime == null || swipeTime - previousSwipeTime > MIN_SWIPE_INTERVAL) {
+            val setting = SwipeAnimationSetting.Builder()
+                .setDirection(direction)
+                .setDuration(Duration.Normal.duration)
+                .setInterpolator(AccelerateInterpolator())
+                .build()
+            layoutManager.setSwipeAnimationSetting(setting)
+            binding.cardStack.swipe()
+            lastSwipeTime = swipeTime
+        }
+    }
+
+    private fun setupObservers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.onEach { state ->
+                    layoutManager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
+                    if (state.showInAppReview) {
+                        requireActivity().showInAppReview()
+                        viewModel.inAppReviewShown()
+                    }
+                    state.game?.let { game ->
+                        if (game.questionsIndex >= game.questions.size) {
+                            //                            TODO finish the game with dialog
+                        }
+                        adapter.setCards(
+                            cards = game.questions.takeLast(game.questions.size - game.questionsIndex),
+                            changedItem = game.questionsIndex - 1,
+                        )
+                    }
+                }.launchIn(this)
+            }
+        }
     }
 
     override fun onDestroyView() {

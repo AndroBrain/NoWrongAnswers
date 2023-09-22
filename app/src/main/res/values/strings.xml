@@ -25,4 +25,7 @@
     <string name="choose_profile">Choose profile</string>
     <string name="profile">%1$d/%2$d questions</string>
     <string name="profile_created_at">Creation date: %1$s</string>
+
+    <!-- Game -->
+    <string name="game_next">Next question</string>
 </resources>

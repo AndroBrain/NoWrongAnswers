@@ -78,6 +78,7 @@ dependencies {
 
 //    Dagger Hilt
     implementation(rootProject.extra.get("daggerHilt") as String)
+    implementation("com.google.android.play:review-ktx:2.0.1")
     ksp(rootProject.extra.get("daggerHiltCompiler") as String)
 
 //    Complex Recycler
