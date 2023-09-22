@@ -5,12 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.androbrain.R
+import com.androbrain.core.utils.APP_MARKET_LINK
+import com.androbrain.core.utils.APP_PAGE_LINK
+import com.androbrain.core.utils.openLink
 import com.androbrain.core.utils.showInAppReview
 import com.androbrain.databinding.FragmentGameBinding
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
@@ -80,6 +85,15 @@ class GameFragment : Fragment() {
 
     private fun setupActions() = with(binding) {
         toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
+
+        toolbar.setOnMenuItemClickListener {
+            Toast.makeText(requireContext(), R.string.rate_to_help_us, Toast.LENGTH_LONG).show()
+            requireContext().openLink(
+                link = APP_MARKET_LINK,
+                failLink = APP_PAGE_LINK
+            )
+            true
+        }
 
         buttonNext.setOnClickListener {
             swipe(Direction.HORIZONTAL.random())

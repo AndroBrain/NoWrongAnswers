@@ -28,4 +28,5 @@
 
     <!-- Game -->
     <string name="game_next">Next question</string>
+    <string name="rate_to_help_us">Write review to help us grow</string>
 </resources>
