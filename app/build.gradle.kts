@@ -5,6 +5,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
     id("androidx.navigation.safeargs.kotlin")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -59,6 +60,11 @@ android {
 }
 
 dependencies {
+//    Android Core
+    implementation(rootProject.extra.get("androidCore") as String)
+    implementation(rootProject.extra.get("appcompact") as String)
+    implementation(rootProject.extra.get("material") as String)
+    implementation(rootProject.extra.get("constraintLayout") as String)
 
 //    Insets
     implementation(rootProject.extra.get("insetter") as String)
@@ -74,10 +80,15 @@ dependencies {
     implementation(rootProject.extra.get("daggerHilt") as String)
     ksp(rootProject.extra.get("daggerHiltCompiler") as String)
 
-    implementation(rootProject.extra.get("androidCore") as String)
-    implementation(rootProject.extra.get("appcompact") as String)
-    implementation(rootProject.extra.get("material") as String)
-    implementation(rootProject.extra.get("constraintLayout") as String)
+//    Complex Recycler
+    implementation("com.airbnb.android:epoxy:5.1.3")
+
+//    Data storage
+    implementation(rootProject.extra.get("datastore") as String)
+
+//    Serialization
+    implementation(rootProject.extra.get("serialization") as String)
+
     testImplementation(rootProject.extra.get("junit") as String)
     androidTestImplementation(rootProject.extra.get("espressoCore") as String)
     androidTestImplementation(rootProject.extra.get("androidJunit") as String)

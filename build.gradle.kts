@@ -5,6 +5,8 @@ ext.apply {
         "coroutinesCore",
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     )
+    set("serialization", "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    set("datastore", "androidx.datastore:datastore:1.0.0")
 
 //    Android Platform
     val navigationVersion = "2.7.2"
@@ -39,6 +41,7 @@ buildscript {
     dependencies {
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.48")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.2")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:1.9.0")
     }
 }
 
