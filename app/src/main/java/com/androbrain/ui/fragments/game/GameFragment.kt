@@ -13,6 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.androbrain.R
+import com.androbrain.core.sound.MediaPlayerSoundManager
+import com.androbrain.core.sound.SoundManager
 import com.androbrain.core.utils.APP_MARKET_LINK
 import com.androbrain.core.utils.APP_PAGE_LINK
 import com.androbrain.core.utils.openLink
@@ -43,6 +45,7 @@ class GameFragment : Fragment() {
         GameCardAdapter(cards = emptyList())
     }
     private val layoutManager get() = binding.cardStack.layoutManager as CardStackLayoutManager
+    private val soundManager: SoundManager = MediaPlayerSoundManager()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,7 +69,10 @@ class GameFragment : Fragment() {
             override fun onCardDragging(direction: Direction?, ratio: Float) = Unit
             override fun onCardSwiped(direction: Direction?) {
                 viewModel.nextQuestion()
-//                playSound(requireContext(), R.raw.sound_card_flip)
+                soundManager.playConcurrentSound(
+                    context = requireContext(),
+                    soundId = R.raw.sound_card_flip
+                )
             }
 
             override fun onCardRewound() = Unit
