@@ -19,7 +19,7 @@ class ChooseProfileViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             gamesRepository.getAllGamesData().onEach { (games) ->
-                updateState { state -> state.copy(games = games) }
+                updateState { state -> state.copy(games = games.sortedByDescending { game -> game.creationTime }) }
             }.launchIn(this)
         }
     }
